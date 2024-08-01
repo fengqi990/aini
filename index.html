@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片轮播</title>
+    <style>
+        .carousel-container {
+            width: 50%; /* 调整轮播容器的宽度 */
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ddd; /* Optional: Border for debugging */
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* 平滑过渡 */
+        }
+
+        .carousel-slide {
+            width: 100%; /* 每张幻灯片的宽度为容器宽度 */
+            flex: 0 0 auto;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 60%; /* 更小的图片尺寸 */
+            height: auto; /* 保持纵横比 */
+            display: block;
+            margin: auto; /* 居中显示图片 */
+        }
+
+        .carousel-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        .heart-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .heart {
+            font-size: 100px; /* 调整心形图标的大小 */
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <div class="carousel-slide">
+                <img src="/aini/img/1.png" alt="Image 1">
+                <div class="carousel-caption">先用爱心把瓶子装满(｡･ω･｡)ﾉ♡️</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="/aini/img/2.png" alt="Image 2">
+                <div class="carousel-caption">再用爱意把缝隙填满～(^з^)-♡</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="/aini/img/3.png" alt="Image 3">
+                <div class="carousel-caption">填满啦！(ღ♡‿♡ღ)</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="/aini/img/4.png" alt="Image 4">
+                <div class="carousel-caption">溢出来啦！Σ(っ °Д °;)っ</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="/aini/img/5.png" alt="Image 5">
+                <div class="carousel-caption">我会一直往里加爱，瓶里的爱少不了一点。(⑉°з°)-♡</div>
+            </div>
+        </div>
+        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="heart-container">
+        <div class="heart">❤️</div>
+    </div>
+
+    <script>
+        const wrapper = document.querySelector('.carousel-wrapper');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const captions = document.querySelectorAll('.carousel-caption');
+        const totalSlides = slides.length;
+        let index = 0;
+
+        function updateCarousel() {
+            const slideWidth = slides[0].offsetWidth;
+            const offset = -index * slideWidth; // 按照每张幻灯片的宽度移动
+            wrapper.style.transform = `translateX(${offset}px)`;
+            updateCaption();
+        }
+
+        function updateCaption() {
+            captions.forEach((caption, i) => {
+                caption.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            index = (index + 1) % totalSlides; // 移动到下一张幻灯片
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + totalSlides) % totalSlides; // 移动到上一张幻灯片
+            updateCarousel();
+        }
+
+        // 初始化显示第一张图片的备注
+        updateCaption();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
