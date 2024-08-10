@@ -91,6 +91,11 @@
                 <img src="/aini/img/5.png" alt="Image 5">
                 <div class="carousel-caption">我会一直往里加爱，瓶里的爱少不了一点。(⑉°з°)-♡</div>
             </div>
+            <!-- 新添加的幻灯片 -->
+            <div class="carousel-slide">
+                <img src="/aini/img/6.png" alt="Image 6">
+                <div class="carousel-caption">我真的爱你</div>
+            </div>
         </div>
         <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
         <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
@@ -104,7 +109,7 @@
         const wrapper = document.querySelector('.carousel-wrapper');
         const slides = document.querySelectorAll('.carousel-slide');
         const captions = document.querySelectorAll('.carousel-caption');
-        const totalSlides = slides.length;
+        const totalSlides = slides.length; // 更新 totalSlides 变量以匹配幻灯片的数量
         let index = 0;
 
         function updateCarousel() {
@@ -135,6 +140,7 @@
     </script>
 </body>
 </html>
+
 
 
 
