@@ -66,6 +66,20 @@
             font-size: 100px; /* 调整心形图标的大小 */
             color: red;
         }
+
+        /* 音频控制按钮样式 */
+        .audio-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .audio-controls button {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,10 +105,13 @@
                 <img src="/aini/img/5.png" alt="Image 5">
                 <div class="carousel-caption">我会一直往里加爱，瓶里的爱少不了一点。(⑉°з°)-♡</div>
             </div>
-            <!-- 新添加的幻灯片 -->
             <div class="carousel-slide">
                 <img src="/aini/img/6.png" alt="Image 6">
                 <div class="carousel-caption">我真的爱你</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="/aini/img/7.png" alt="Image 7">
+                <div class="carousel-caption">有你这个冬天更值得期待</div>
             </div>
         </div>
         <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
@@ -105,16 +122,25 @@
         <div class="heart">❤️</div>
     </div>
 
+    <!-- 音频播放器 -->
+    <audio id="background-music" src="/aini/music/多远都要在一起.mp3" loop></audio>
+
+    <div class="audio-controls">
+        <button id="play-btn" onclick="toggleMusic()">播放音乐</button>
+    </div>
+
     <script>
         const wrapper = document.querySelector('.carousel-wrapper');
         const slides = document.querySelectorAll('.carousel-slide');
         const captions = document.querySelectorAll('.carousel-caption');
-        const totalSlides = slides.length; // 更新 totalSlides 变量以匹配幻灯片的数量
+        const totalSlides = slides.length;
         let index = 0;
+        const music = document.getElementById('background-music');
+        const playBtn = document.getElementById('play-btn');
 
         function updateCarousel() {
             const slideWidth = slides[0].offsetWidth;
-            const offset = -index * slideWidth; // 按照每张幻灯片的宽度移动
+            const offset = -index * slideWidth;
             wrapper.style.transform = `translateX(${offset}px)`;
             updateCaption();
         }
@@ -126,13 +152,26 @@
         }
 
         function nextSlide() {
-            index = (index + 1) % totalSlides; // 移动到下一张幻灯片
+            index = (index + 1) % totalSlides;
             updateCarousel();
+            // 播放音乐
+            music.play();
+            playBtn.textContent = '暂停音乐';
         }
 
         function prevSlide() {
-            index = (index - 1 + totalSlides) % totalSlides; // 移动到上一张幻灯片
+            index = (index - 1 + totalSlides) % totalSlides;
             updateCarousel();
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                playBtn.textContent = '暂停音乐';
+            } else {
+                music.pause();
+                playBtn.textContent = '播放音乐';
+            }
         }
 
         // 初始化显示第一张图片的备注
